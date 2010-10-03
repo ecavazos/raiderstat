@@ -1,0 +1,41 @@
+!!!5
+%html
+  %head
+    %style{ :type => "text/css" }
+      :sass
+        body
+          background-color: #fff
+          font-family: Helvetica, Arial, san-serif
+          text-align: center
+
+        h1
+          font-size: 24px
+
+        #main
+          background-color: #ddd
+          border-top-left-radius: 20px
+          border-top-right-radius: 20px
+          border-bottom-right-radius: 20px
+          border-bottom-left-radius: 20px
+          box-shadow: #000 0px 0px 5px
+          margin: 0 auto
+          padding: 20px
+          overflow: hidden
+          width: 400px
+
+        dl
+          overflow: hidden
+          text-align: left
+        dt
+          clear: left
+          float: left
+          text-align: right
+          width: 150px
+        dd
+          float: left
+          margin: 0 0 0 10px
+
+    %title RaiderStat
+  %body
+    = yield
+
