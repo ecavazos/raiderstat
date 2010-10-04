@@ -9,6 +9,23 @@ require 'sinatra/base'
 
 class App < Sinatra::Base
 
+  def standings
+    url = "http://www.nfl.com/standings"
+    sel = "//td[text()='AFC West Team']/ancestor::tr/following-sibling::tr"
+
+    i = 1
+    h = {}
+    Nokogiri::HTML(open(url)).xpath(sel).each do |tr|
+      if tr.children[0].to_s =~ /Oak/
+        h[:wins]   = tr.children[2].text
+        h[:losses] = tr.children[4].text
+        h[:rank]   = i
+      end
+      i += 1
+    end
+    h
+  end
+
   def stats(params)
     side = params[:side]
     stat = params[:stat]
@@ -64,6 +81,11 @@ class App < Sinatra::Base
     @tot_def = stats(:side => :defense, :stat => :total).xpath(selector).text
     @def_pas = stats(:side => :defense, :stat => :passing).xpath(selector).text
     @def_rus = stats(:side => :defense, :stat => :rushing).xpath(selector).text
+
+    std = standings
+    @wins   = std[:wins]
+    @losses = std[:losses]
+    @rank   = std[:rank]
 
     haml :index
   end

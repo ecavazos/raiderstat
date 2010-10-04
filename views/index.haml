@@ -1,6 +1,16 @@
 %h1 How are my Raiders this year?
 #main
   %dl
+    %dt
+      Record:
+    %dd
+      = "#{@wins} - #{@losses}"
+    %dt
+      Division Rank:
+    %dd
+      = @rank
+  %hr
+  %dl
     %dt Total Offense:
     %dd ##{@tot_off}
 
@@ -19,14 +29,7 @@
 
     %dt Rushing Defense:
     %dd ##{@def_rus}
-  %hr
-  %dl
-    %dt
-      Record:
-    %dd
-      ???
-    %dt
-      Division Rank:
-    %dd
-      ???
+
+#footer
+  Created by Emilio Cavazos
 
