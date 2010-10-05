@@ -11,7 +11,7 @@ require 'stat_scraper'
 class App < Sinatra::Base
 
   configure :development do
-    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/stats.db")
+    DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dire.pwd}/stats.db")
     DataMapper.auto_migrate!
   end
 
