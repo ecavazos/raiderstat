@@ -11,13 +11,17 @@ class StatScraper
   end
 
   def stats
-    league_stats(:side => :offense, :stat => :total)
-    league_stats(:side => :offense, :stat => :passing)
-    league_stats(:side => :offense, :stat => :rushing)
-    league_stats(:side => :defense, :stat => :total)
-    league_stats(:side => :defense, :stat => :passing)
-    league_stats(:side => :defense, :stat => :rushing)
-    standings()
+    if cache_expired?
+      league_stats(:side => :offense, :stat => :total)
+      league_stats(:side => :offense, :stat => :passing)
+      league_stats(:side => :offense, :stat => :rushing)
+      league_stats(:side => :defense, :stat => :total)
+      league_stats(:side => :defense, :stat => :passing)
+      league_stats(:side => :defense, :stat => :rushing)
+      standings()
+      @data.updated = Time.now
+      @data.save
+    end
 
     @data
   end
@@ -28,17 +32,15 @@ class StatScraper
     url = "http://www.nfl.com/standings"
     sel = "//td[text()='AFC West Team']/ancestor::tr/following-sibling::tr"
 
-    if cache_expired?
-      i = 1
+    i = 1
 
-      Nokogiri::HTML(open(url)).xpath(sel).each do |tr|
-        if tr.children[0].to_s =~ /Oak/
-          @data.wins   = tr.children[2].text
-          @data.losses = tr.children[4].text
-          @data.rank   = i
-        end
-        i += 1
+    Nokogiri::HTML(open(url)).xpath(sel).each do |tr|
+      if tr.children[0].to_s =~ /Oak/
+        @data.wins   = tr.children[2].text
+        @data.losses = tr.children[4].text
+        @data.rank   = i
       end
+      i += 1
     end
   end
 
