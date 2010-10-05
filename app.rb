@@ -5,7 +5,8 @@ Bundler.setup unless File.exists?(File.expand_path('../.bundle/environment', __F
 Bundler.require(:default)
 
 require 'sinatra/base'
-require "dm-core"
+require 'dm-core'
+require 'dm-migrations'
 require 'stat_scraper'
 
 class App < Sinatra::Base
