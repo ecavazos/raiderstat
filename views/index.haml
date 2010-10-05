@@ -4,31 +4,31 @@
     %dt
       Record:
     %dd
-      = "#{@wins} - #{@losses}"
+      = "#{@stats[:wins]} - #{@stats[:losses]}"
     %dt
       Division Rank:
     %dd
-      = @rank
+      = @stats[:rank]
   %hr
   %dl
     %dt Total Offense:
-    %dd ##{@tot_off}
+    %dd ##{@stats[:total_offense]}
 
     %dt Passing Offense:
-    %dd ##{@off_pas}
+    %dd ##{@stats[:passing_offense]}
 
     %dt Rushing Offense:
-    %dd ##{@off_rus}
+    %dd ##{@stats[:rushing_offense]}
   %hr
   %dl
     %dt Total Defense:
-    %dd ##{@tot_def}
+    %dd ##{@stats[:total_defense]}
 
     %dt Passing Defense:
-    %dd ##{@def_pas}
+    %dd ##{@stats[:passing_defense]}
 
     %dt Rushing Defense:
-    %dd ##{@def_rus}
+    %dd ##{@stats[:rushing_defense]}
 
 #footer
   Created by Emilio Cavazos
