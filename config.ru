@@ -1,4 +1,7 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'app')
+# add lib dir to load path
+$:.unshift File.expand_path('../lib', __FILE__)
+
+require File.expand_path('../app', __FILE__)
 
 run App
 
