@@ -6,5 +6,12 @@ gem 'haml'
 gem 'sass'
 gem 'nokogiri'
 gem 'datamapper', :require => false
-gem 'dm-sqlite-adapter'
+
+group :development do
+  gem 'dm-sqlite-adapter'
+end
+
+group :production do
+  gem 'dm-postgres-adapter'
+end
 
