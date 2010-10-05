@@ -62,6 +62,6 @@ class StatScraper
   end
 
   def cache_expired?
-    @data.updated.nil? || (Time.now - @data.updated) % 24 >= 24
+    @data.updated.nil? || (Time.now - @data.updated.to_i) % 24 >= 24
   end
 end
