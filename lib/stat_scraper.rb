@@ -1,30 +1,25 @@
 require 'open-uri'
-require 'pstore'
+require 'dm-core'
 require 'nokogiri'
 require 'url_builder'
+require 'cache'
 
 class StatScraper
 
   def initialize
-    @data = PStore.new('stats.pstore')
+    @data = Cache.first || Cache.create
   end
 
   def stats
-    # get row
-    # //a[text()='Oakland Raiders']/ancestor::tr
+    league_stats(:side => :offense, :stat => :total)
+    league_stats(:side => :offense, :stat => :passing)
+    league_stats(:side => :offense, :stat => :rushing)
+    league_stats(:side => :defense, :stat => :total)
+    league_stats(:side => :defense, :stat => :passing)
+    league_stats(:side => :defense, :stat => :rushing)
+    standings()
 
-    @data.transaction do
-      s = {
-        :total_offense   => league_stats(:side => :offense, :stat => :total),
-        :passing_offense => league_stats(:side => :offense, :stat => :passing),
-        :rushing_offense => league_stats(:side => :offense, :stat => :rushing),
-        :total_defense   => league_stats(:side => :defense, :stat => :total),
-        :passing_defense => league_stats(:side => :defense, :stat => :passing),
-        :rushing_defense => league_stats(:side => :defense, :stat => :rushing)
-      }
-
-      s.merge!(standings())
-    end
+    @data
   end
 
   private
@@ -38,19 +33,13 @@ class StatScraper
 
       Nokogiri::HTML(open(url)).xpath(sel).each do |tr|
         if tr.children[0].to_s =~ /Oak/
-          @data[:wins]   = tr.children[2].text
-          @data[:losses] = tr.children[4].text
-          @data[:rank]   = i
+          @data.wins   = tr.children[2].text
+          @data.losses = tr.children[4].text
+          @data.rank   = i
         end
         i += 1
       end
     end
-
-    h = {
-      :wins   => @data[:wins],
-      :losses => @data[:losses],
-      :rank   => @data[:rank]
-    }
   end
 
   def league_stats(params)
@@ -71,6 +60,6 @@ class StatScraper
   end
 
   def cache_expired?
-    @data[:last_updated].nil? || (Time.now - @data[:last_updated]) % 24 >= 24
+    @data.updated.nil? || (Time.now - @data.updated) % 24 >= 24
   end
 end
