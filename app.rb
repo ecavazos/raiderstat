@@ -10,7 +10,7 @@ require 'stat_scraper'
 
 class App < Sinatra::Base
 
-  configure :development do
+  configure do
     DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/stats.db")
     DataMapper.auto_migrate!
   end
