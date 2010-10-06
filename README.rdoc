@@ -1,8 +1,10 @@
 = RaiderStat
 
-This is a tiny sinatra app created to save me the effort of always having to
-crawl nfl.com manually to collect the stats about the Oakland Raiders that
-I'm most interested in.
+RaiderStat is a simple app I created to save me the effort of always having to
+crawl http://nfl.com manually to collect the Oakland Raiders stats that I care
+about.  As far as I can tell, there is not a single page anywhere on the
+Internetz that I can get these stats.  So this page will scrape multiple pages
+and aggregate the stats for me.
 
 = Demo
 
