@@ -62,6 +62,7 @@ class StatScraper
   end
 
   def cache_expired?
-    @data.updated.nil? || (Time.now.to_i - @data.updated.to_time.to_i) % 24 >= 24
+    secs_in_day = (24*60*60)
+    @data.updated.nil? || (Time.now - @data.updated.to_time) / secs_in_day >= 1
   end
 end
