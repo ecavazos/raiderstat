@@ -1,0 +1,9 @@
+= RaiderStat
+
+This is a tiny sinatra app created to save me the effort of always having to
+crawl nfl.com manually to collect the stats about the Oakland Raiders that
+I'm most interested in.
+
+= Demo
+
+http://raiderstat.heroku.com
