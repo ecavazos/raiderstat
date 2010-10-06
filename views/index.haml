@@ -1,34 +1,35 @@
 %h1 How are my Raiders this year?
 #main
-  %dl
-    %dt
-      Record:
-    %dd
-      = "#{@stats[:wins]} - #{@stats[:losses]}"
-    %dt
-      Division Rank:
-    %dd
-      = @stats[:rank]
-  %hr
-  %dl
-    %dt Total Offense:
-    %dd ##{@stats[:total_offense]}
+  #pad
+    %dl
+      %dt
+        Record:
+      %dd
+        = "#{@stats[:wins]} - #{@stats[:losses]}"
+      %dt
+        Division Rank:
+      %dd
+        = @stats[:rank]
+    %hr
+    %dl
+      %dt Total Offense:
+      %dd ##{@stats[:total_offense]}
 
-    %dt Passing Offense:
-    %dd ##{@stats[:passing_offense]}
+      %dt Passing Offense:
+      %dd ##{@stats[:passing_offense]}
 
-    %dt Rushing Offense:
-    %dd ##{@stats[:rushing_offense]}
-  %hr
-  %dl
-    %dt Total Defense:
-    %dd ##{@stats[:total_defense]}
+      %dt Rushing Offense:
+      %dd ##{@stats[:rushing_offense]}
+    %hr
+    %dl
+      %dt Total Defense:
+      %dd ##{@stats[:total_defense]}
 
-    %dt Passing Defense:
-    %dd ##{@stats[:passing_defense]}
+      %dt Passing Defense:
+      %dd ##{@stats[:passing_defense]}
 
-    %dt Rushing Defense:
-    %dd ##{@stats[:rushing_defense]}
+      %dt Rushing Defense:
+      %dd ##{@stats[:rushing_defense]}
 
 #footer
   Created by Emilio Cavazos
