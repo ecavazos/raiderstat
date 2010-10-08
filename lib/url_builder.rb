@@ -4,13 +4,13 @@ module URLBuilder
       side = side.to_sym
       stat = stat.to_sym
 
-      role = {
-        :offense => 'TM',
-        :defense => 'OPP'
-      }
       type = {
         :offense => 'offensiveStatisticCategory',
         :defense => 'defensiveStatisticCategory'
+      }
+      role = {
+        :offense => 'TM',
+        :defense => 'OPP'
       }
       sort = {
         :offense => 2,

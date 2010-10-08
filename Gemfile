@@ -15,3 +15,7 @@ group :production do
   gem 'dm-postgres-adapter'
 end
 
+group :test do
+  gem 'rack-test'
+  gem 'rspec', '2.0.0.rc'
+end
