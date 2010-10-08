@@ -10,48 +10,44 @@ describe "StatScraper" do
     @stats = StatScraper.new().stats
   end
 
+  def should_be_in_range(val, x, y)
+    (val > x).should be_true
+    (val < y).should be_true
+  end
+
   it "should have a value for wins" do
-    (@stats.wins >= 0).should be_true
-    (@stats.wins < 17).should be_true
+    should_be_in_range(@stats.wins, -1, 17)
   end
 
   it "should have a value for losses" do
-    (@stats.losses >= 0).should be_true
-    (@stats.losses < 17).should be_true
+    should_be_in_range(@stats.losses, -1, 17)
   end
 
   it "should have a value for division rank" do
-    (@stats.rank > 1).should be_true
-    (@stats.rank < 5).should be_true
+    should_be_in_range(@stats.rank, 1, 5)
   end
 
   it "should have a value for total offense" do
-    (@stats.total_offense > 0).should be_true
-    (@stats.total_offense < 33).should be_true
+    should_be_in_range(@stats.total_offense, 0, 33)
   end
 
   it "should have a value for passing offense" do
-    (@stats.passing_offense > 0).should be_true
-    (@stats.passing_offense < 33).should be_true
+    should_be_in_range(@stats.passing_offense, 0, 33)
   end
 
   it "should have a value for rushing offense" do
-    (@stats.rushing_offense > 0).should be_true
-    (@stats.rushing_offense < 33).should be_true
+    should_be_in_range(@stats.rushing_offense, 0, 33)
   end
 
   it "should have a value for total defense" do
-    (@stats.total_defense > 0).should be_true
-    (@stats.total_defense < 33).should be_true
+    should_be_in_range(@stats.total_defense, 0, 33)
   end
 
   it "should have a value for passing defense" do
-    (@stats.passing_defense > 0).should be_true
-    (@stats.passing_defense < 33).should be_true
+    should_be_in_range(@stats.passing_defense, 0, 33)
   end
 
   it "should have a value for rushing defense" do
-    (@stats.rushing_defense > 0).should be_true
-    (@stats.rushing_defense < 33).should be_true
+    should_be_in_range(@stats.rushing_defense, 0, 33)
   end
 end
