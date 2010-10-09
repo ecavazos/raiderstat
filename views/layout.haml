@@ -60,6 +60,12 @@
           float: left
           margin: 0 0 0 20px
 
+        .fork
+          position: absolute
+          top: 0
+          right: 0
+          border: 0
+
         #footer
           color: #777
           font-size: 11px
@@ -68,5 +74,7 @@
 
     %title RaiderStat
   %body
+    %a{ :href => "http://github.com/ecavazos/raiderstat"}
+      %img{ :src => "http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png", :alt => "Fork me on GitHub", :class => "fork" }
     = yield
 
