@@ -29,6 +29,11 @@ describe "App" do
     @body.include?(expected).should be_true
   end
 
+  it "should have logo" do
+    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/raiders_logo.png' /> </div>"
+    @body.include?(expected).should be_true
+  end
+
   it "should have division rank" do
     expected = /<dt>.+Division\sRank:.+<\/dt>.+<dd>.+\d.+<\/dd>/mx
     last_response.body.should match(expected)

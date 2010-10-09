@@ -3,17 +3,27 @@
   %head
     %style{ :type => "text/css" }
       :sass
+        html, body
+          background: -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(232,232,232)),color-stop(0.95, rgb(199,199,199)))
+          background: -moz-linear-gradient(center bottom,rgb(232,232,232) 11%,rgb(199,199,199) 95%)
+          height: 100%
+          margin: 0
+          padding: 0
+
         body
-          background-color: #fff
           font-family: Helvetica, Arial, san-serif
+          padding: 50px 0 0 0
           text-align: center
 
         h1
-          font-size: 24px
-          margin: 60px 0 20px 0
+          color: #464646
+          font-size: 32px
+          margin: 0 0 30px 0
+          text-shadow: #eee 0 -1px 0px
 
         #main
-          background-color: #ddd
+          background: -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(213,213,213)),color-stop(0.95, rgb(232,232,232)))
+          background: -moz-linear-gradient(center bottom,rgb(213,213,213) 11%,rgb(232,232,232) 95%)
           border: solid 5px rgba(255, 255, 255, 0.7)
           border-top-left-radius: 20px
           border-top-right-radius: 20px
@@ -30,7 +40,7 @@
           text-shadow: #fff 0 -1px 0px
 
         #pad
-          padding: 60px 40px 40px 40px
+          padding: 20px 40px 40px 40px
 
         #bottom
           background-color: #ccc
@@ -51,7 +61,7 @@
           margin: 0 0 0 20px
 
         #footer
-          color: #bbb
+          color: #777
           font-size: 11px
           margin: 0 auto
           text-align: center
