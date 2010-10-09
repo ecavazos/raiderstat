@@ -25,12 +25,12 @@ describe "App" do
   end
 
   it "should have correct header" do
-    expected = "<h1>How are my Raiders this year?<\/h1>"
+    expected = "<h1>How are my Raiders this year?</h1>"
     @body.include?(expected).should be_true
   end
 
   it "should have logo" do
-    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/logo.png' /> </div>"
+    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/logo.png'> </div>"
     @body.include?(expected).should be_true
   end
 
