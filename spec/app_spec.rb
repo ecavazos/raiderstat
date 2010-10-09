@@ -30,7 +30,7 @@ describe "App" do
   end
 
   it "should have logo" do
-    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/raiders_logo.png' /> </div>"
+    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/logo.png' /> </div>"
     @body.include?(expected).should be_true
   end
 
