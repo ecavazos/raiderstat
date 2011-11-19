@@ -18,7 +18,9 @@ class StatScraper
       league_stats(:side => :defense, :stat => :total)
       league_stats(:side => :defense, :stat => :passing)
       league_stats(:side => :defense, :stat => :rushing)
-      standings()
+
+      standings
+
       @data.updated = Time.now
       @data.save
     end
@@ -55,7 +57,8 @@ class StatScraper
     key = "#{stat}_#{side}".to_sym
 
     if @data[key].nil? || cache_expired?
-      @data[key] = Nokogiri::HTML(open(url)).xpath(sel).text
+      page = open url
+      @data[key] = Nokogiri::HTML(page).xpath(sel).text
     end
 
     @data[key]

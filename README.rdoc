@@ -6,6 +6,8 @@ about.  As far as I can tell, there is not a single page anywhere on the
 Internetz that I can get these stats.  So this app will scrape multiple pages
 and aggregate the stats for me.
 
+Ruby 1.9.2 (p290)
+
 = Demo
 
 http://raiderstat.heroku.com

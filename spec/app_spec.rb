@@ -1,5 +1,5 @@
-require File.expand_path('../spec_helper', __FILE__)
-require File.expand_path('../../app', __FILE__)
+require 'spec_helper'
+require './app'
 
 App.set :environment, :test
 
@@ -7,7 +7,7 @@ describe "App" do
   include Rack::Test::Methods
 
   def app
-    App
+    @app ||= App.new
   end
 
   before(:all) do

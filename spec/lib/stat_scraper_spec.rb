@@ -1,4 +1,5 @@
-require File.expand_path('../../spec_helper', __FILE__)
+require 'spec_helper'
+require 'artifice'
 require 'dm-migrations'
 require 'stat_scraper'
 
@@ -7,47 +8,70 @@ describe "StatScraper" do
   before(:all) do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/stats_test.db")
     DataMapper.auto_migrate!
-    @stats = StatScraper.new().stats
-  end
 
-  def should_be_in_range(val, x, y)
-    (val > x).should be_true
-    (val < y).should be_true
+    responder = lambda { |env|
+      p Rack::Request.new(env).url
+
+      stats = '
+        <tr>
+          <td>1</td>
+          <td><a href="">Oakland Raiders</a></td>
+        </tr>
+      '
+
+      standings = '
+        <tr>
+          <td>AFC West Team</td>
+        </tr>
+        <tr>
+          <td>Oakland Raiders</td>
+          <td>16</td>
+          <td>0</td>
+        </tr>
+        <tr><td>Donkeys</td></tr>
+      '
+
+      [200, {}, [stats + standings]]
+    }
+
+    Artifice.activate_with responder do
+      @stats = StatScraper.new().stats
+    end
   end
 
   it "should have a value for wins" do
-    should_be_in_range(@stats.wins, -1, 17)
+    @stats.wins.should == 16
   end
 
   it "should have a value for losses" do
-    should_be_in_range(@stats.losses, -1, 17)
+    @stats.losses.should == 0
   end
 
   it "should have a value for division rank" do
-    should_be_in_range(@stats.rank, 1, 5)
+    @stats.rank.should == 1
   end
 
   it "should have a value for total offense" do
-    should_be_in_range(@stats.total_offense, 0, 33)
+    @stats.total_offense.should == 1
   end
 
   it "should have a value for passing offense" do
-    should_be_in_range(@stats.passing_offense, 0, 33)
+    @stats.passing_offense.should == 1
   end
 
   it "should have a value for rushing offense" do
-    should_be_in_range(@stats.rushing_offense, 0, 33)
+    @stats.rushing_offense.should == 1
   end
 
   it "should have a value for total defense" do
-    should_be_in_range(@stats.total_defense, 0, 33)
+    @stats.total_defense.should == 1
   end
 
   it "should have a value for passing defense" do
-    should_be_in_range(@stats.passing_defense, 0, 33)
+    @stats.passing_defense.should == 1
   end
 
   it "should have a value for rushing defense" do
-    should_be_in_range(@stats.rushing_defense, 0, 33)
+    @stats.rushing_defense.should == 1
   end
 end

@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'sinatra', '1.0', :require => false
-
-gem 'haml'
-gem 'sass'
-gem 'nokogiri'
+gem 'artifice'
 gem 'datamapper', :require => false
+gem 'haml'
+gem 'nokogiri'
+gem 'rake'
+gem 'sass'
+gem 'sinatra', '1.0', :require => false
 
 group :development do
   gem 'dm-sqlite-adapter'
