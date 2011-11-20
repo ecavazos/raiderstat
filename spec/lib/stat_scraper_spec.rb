@@ -5,73 +5,85 @@ require 'stat_scraper'
 
 describe "StatScraper" do
 
-  before(:all) do
+  before do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/stats_test.db")
     DataMapper.auto_migrate!
+  end
+
+  def stats opts = {}
+
+    cache = nil
+
+    opts = {
+      :position => 1,
+      :wins     => 16,
+      :losses   => 0,
+    }.merge opts
 
     responder = lambda { |env|
-      p Rack::Request.new(env).url
-
-      stats = '
+      pos_stats = "
         <tr>
-          <td>1</td>
+          <td>#{ opts[:position] }</td>
           <td><a href="">Oakland Raiders</a></td>
         </tr>
-      '
+      "
 
-      standings = '
+      # rank = 1
+      standings = "
         <tr>
           <td>AFC West Team</td>
         </tr>
         <tr>
           <td>Oakland Raiders</td>
-          <td>16</td>
-          <td>0</td>
+          <td>#{ opts[:wins] }</td>
+          <td>#{ opts[:losses] }</td>
         </tr>
         <tr><td>Donkeys</td></tr>
-      '
+      "
 
-      [200, {}, [stats + standings]]
+      [200, {}, [pos_stats, standings]]
     }
 
     Artifice.activate_with responder do
-      @stats = StatScraper.new().stats
+      cache = StatScraper.new().stats
     end
+
+    cache
   end
 
   it "should have a value for wins" do
-    @stats.wins.should == 16
+    stats(:wins => 16).wins.should == 16
   end
 
   it "should have a value for losses" do
-    @stats.losses.should == 0
+    stats(:losses => 0).losses.should == 0
   end
 
   it "should have a value for division rank" do
-    @stats.rank.should == 1
+    stats.rank.should == 1
   end
 
   it "should have a value for total offense" do
-    @stats.total_offense.should == 1
+    stats(:position => 2).total_offense.should == 2
   end
 
   it "should have a value for passing offense" do
-    @stats.passing_offense.should == 1
+    stats(:position => 1).passing_offense.should == 1
   end
 
   it "should have a value for rushing offense" do
-    @stats.rushing_offense.should == 1
+    stats(:position => 3).rushing_offense.should == 3
   end
 
   it "should have a value for total defense" do
-    @stats.total_defense.should == 1
+    stats(:position => 2).total_defense.should == 2
   end
 
   it "should have a value for passing defense" do
-    @stats.passing_defense.should == 1
+    stats(:position => 4).passing_defense.should == 4
   end
 
   it "should have a value for rushing defense" do
-    @stats.rushing_defense.should == 1
+    stats(:position => 2).rushing_defense.should == 2
   end
 end
