@@ -7,25 +7,24 @@ require 'cache'
 class StatScraper
 
   def initialize
-    @data = Cache.first || Cache.create
+    @cache = Cache.first || Cache.new
   end
 
   def stats
-    if cache_expired?
-      league_stats(:side => :offense, :stat => :total)
-      league_stats(:side => :offense, :stat => :passing)
-      league_stats(:side => :offense, :stat => :rushing)
-      league_stats(:side => :defense, :stat => :total)
-      league_stats(:side => :defense, :stat => :passing)
-      league_stats(:side => :defense, :stat => :rushing)
+    return @cache unless cache_expired?
 
-      standings
+    league_stats :side => :offense, :stat => :total
+    league_stats :side => :offense, :stat => :passing
+    league_stats :side => :offense, :stat => :rushing
+    league_stats :side => :defense, :stat => :total
+    league_stats :side => :defense, :stat => :passing
+    league_stats :side => :defense, :stat => :rushing
 
-      @data.updated = Time.now
-      @data.save
-    end
+    standings
 
-    @data
+    @cache.updated = Time.now
+    @cache.save
+    @cache
   end
 
   private
@@ -36,13 +35,14 @@ class StatScraper
 
     i = 1
 
-    Nokogiri::HTML(open(url)).xpath(sel).each do |tr|
+    Nokogiri::HTML( open(url) ).xpath(sel).each do |tr|
       if tr.children[0].to_s =~ /Oak/
-        @data.wins   = tr.children[2].text
-        @data.losses = tr.children[4].text
-        @data.rank   = i
+        @cache.wins   = tr.children[2].text
+        @cache.losses = tr.children[4].text
+        @cache.rank   = i
+      else
+        i += 1
       end
-      i += 1
     end
   end
 
@@ -56,16 +56,17 @@ class StatScraper
 
     key = "#{stat}_#{side}".to_sym
 
-    if @data[key].nil? || cache_expired?
+    if @cache[key].nil? || cache_expired?
       page = open url
-      @data[key] = Nokogiri::HTML(page).xpath(sel).text
+      @cache[key] = Nokogiri::HTML(page).xpath(sel).text
     end
 
-    @data[key]
+    @cache[key]
   end
 
   def cache_expired?
-    secs_in_day = (24*60*60)
-    @data.updated.nil? || (Time.now - @data.updated.to_time) / secs_in_day >= 1
+    secs_in_day = ( 24 * 60 * 60 )
+    @cache.updated.nil? || (Time.now - @cache.updated.to_time) / secs_in_day >= 1
   end
 end
+

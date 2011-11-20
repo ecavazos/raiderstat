@@ -22,5 +22,10 @@ class App < Sinatra::Base
     @stats = StatScraper.new().stats
     haml :index
   end
+
+  get "/css/:stylesheet.css" do
+    content_type "text/css", :charset => "utf-8"
+    sass :"css/#{ params[:stylesheet] }", :style => :compact
+  end
 end
 

@@ -1,80 +1,14 @@
 !!!5
+
 %html
+
   %head
-    %style{ :type => "text/css" }
-      :sass
-        html, body
-          background: -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(232,232,232)),color-stop(0.95, rgb(199,199,199)))
-          background: -moz-linear-gradient(center bottom,rgb(232,232,232) 11%,rgb(199,199,199) 95%)
-          height: 100%
-          margin: 0
-          padding: 0
-
-        body
-          font-family: Helvetica, Arial, san-serif
-          padding: 50px 0 0 0
-          text-align: center
-
-        h1
-          color: #464646
-          font-size: 32px
-          margin: 0 0 30px 0
-          text-shadow: #eee 0 -1px 0px
-
-        #main
-          background: -webkit-gradient(linear,left bottom,left top,color-stop(0.11, rgb(213,213,213)),color-stop(0.95, rgb(232,232,232)))
-          background: -moz-linear-gradient(center bottom,rgb(213,213,213) 11%,rgb(232,232,232) 95%)
-          border: solid 5px rgba(255, 255, 255, 0.7)
-          border-top-left-radius: 20px
-          border-top-right-radius: 20px
-          border-bottom-right-radius: 20px
-          border-bottom-left-radius: 20px
-          -moz-box-shadow:    #333 0px 0px 4px
-          -webkit-box-shadow: #333 0px 0px 4px
-          box-shadow:         #333 0px 0px 4px
-          color: #222
-          font-size: 18px
-          margin: 0 auto 10px auto
-          overflow: hidden
-          width: 370px
-          text-shadow: #fff 0 -1px 0px
-
-        #pad
-          padding: 20px 40px 40px 40px
-
-        #bottom
-          background-color: #ccc
-          height: 80px
-
-        dl
-          margin: 0 auto 15px
-          overflow: hidden
-          text-align: left
-          width: 80%
-        dt
-          clear: left
-          float: left
-          text-align: right
-          width: 150px
-        dd
-          float: left
-          margin: 0 0 0 20px
-
-        .fork
-          position: absolute
-          top: 0
-          right: 0
-          border: 0
-
-        #footer
-          color: #777
-          font-size: 11px
-          margin: 0 auto
-          text-align: center
-
+    %link{:href => "/css/screen.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
     %title RaiderStat
+
   %body
     %a{ :href => "http://github.com/ecavazos/raiderstat"}
       %img{ :src => "http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png", :alt => "Fork me on GitHub", :class => "fork" }
+
     = yield
 

@@ -6,7 +6,7 @@ require 'stat_scraper'
 describe "StatScraper" do
 
   before do
-    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/stats_test.db")
+    DataMapper.setup(:default, "sqlite3://#{ Dir.pwd }/stats_test.db")
     DataMapper.auto_migrate!
   end
 
