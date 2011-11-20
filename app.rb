@@ -1,4 +1,9 @@
-require 'bootstrapper'
+require 'rubygems'
+require 'bundler/setup'
+require 'sinatra/base'
+require 'dm-core'
+require 'dm-migrations'
+require 'stat_scraper'
 
 class App < Sinatra::Base
 

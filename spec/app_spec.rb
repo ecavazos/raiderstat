@@ -5,42 +5,75 @@ App.set :environment, :test
 
 describe "App" do
   include Rack::Test::Methods
+  include Capybara::DSL
 
-  def app
-    @app ||= App.new
+  Capybara.app = App
+
+  before :all do
+    DataMapper.setup(:default, "sqlite3://#{ Dir.pwd }/stats_test.db")
+    DataMapper.auto_migrate!
+    Cache.create({
+      :rank            => 1,
+      :wins            => 16,
+      :losses          => 0,
+      :total_offense   => 1,
+      :passing_offense => 1,
+      :rushing_offense => 1,
+      :total_defense   => 1,
+      :passing_defense => 1,
+      :rushing_defense => 1,
+      :updated         => Time.now
+    })
   end
 
-  before(:all) do
-    get '/'
-    @body = last_response.body.gsub(/\s+/, ' ')
-  end
-
-  it "should respond to /" do
-    last_response.should be_ok
+  before do
+    visit '/'
   end
 
   it "should have a title of 'RaiderStat'" do
-    expected = "<title>RaiderStat</title>"
-    @body.include?(expected).should be_true
+    find('title').text.should == 'RaiderStat'
   end
 
   it "should have correct header" do
-    expected = "<h1>How are my Raiders this year?</h1>"
-    @body.include?(expected).should be_true
+    find('h1').text.should == 'How are my Raiders this year?'
   end
 
   it "should have logo" do
-    expected = "<div id='logo'> <img alt='Oakland Raiders' src='/images/logo.png'> </div>"
-    @body.include?(expected).should be_true
+    within '#logo' do
+      find('img')[:alt].should == 'Oakland Raiders'
+      find('img')[:src].should == '/images/logo.png'
+    end
   end
 
-  it "should have division rank" do
-    expected = /<dt>.+Division\sRank:.+<\/dt>.+<dd>.+\d.+<\/dd>/mx
-    last_response.body.should match(expected)
+  it "should have stats" do
+    page.should have_content('Record:')
+    find('.record').text.should == '16 - 0'
+
+    page.should have_content('Division Rank:')
+    find('.rank').text.should == '1'
+
+    page.should have_content('Total Offense:')
+    find('.total_offense').text.should == '#1'
+
+    page.should have_content('Passing Offense:')
+    find('.passing_offense').text.should == '#1'
+
+    page.should have_content('Rushing Offense:')
+    find('.rushing_offense').text.should == '#1'
+
+    page.should have_content('Total Defense:')
+    find('.total_defense').text.should == '#1'
+
+    page.should have_content('Passing Defense:')
+    find('.passing_defense').text.should == '#1'
+
+    page.should have_content('Rushing Defense:')
+    find('.rushing_defense').text.should == '#1'
   end
 
   it "should have an author credit" do
-    expected = "<div id='footer'> Created by Emilio Cavazos </div>"
-    @body.include?(expected).should be_true
+    within '#footer' do
+      page.should have_content('Created by Emilio Cavazos')
+    end
   end
 end

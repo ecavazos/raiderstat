@@ -10,6 +10,7 @@ gem 'sinatra', '1.0', :require => false
 
 group :development do
   gem 'dm-sqlite-adapter'
+  gem 'thin'
 end
 
 group :production do
@@ -17,6 +18,7 @@ group :production do
 end
 
 group :test do
+  gem 'capybara'
   gem 'rack-test'
   gem 'rspec', '2.0.0.rc'
 end

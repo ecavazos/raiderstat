@@ -1,37 +1,40 @@
 %h1 How are my Raiders this year?
+
 #main
   #pad
     #logo
       %img{ :src => "/images/logo.png", :alt => "Oakland Raiders" }
+
     %dl
-      %dt
-        Record:
-      %dd
-        = "#{@stats[:wins]} - #{@stats[:losses]}"
-      %dt
-        Division Rank:
-      %dd
-        = @stats[:rank]
+      %dt Record:
+      %dd.record= "#{@stats[:wins]} - #{@stats[:losses]}"
+
+      %dt Division Rank:
+      %dd.rank= @stats[:rank]
+
     %hr
+
     %dl
       %dt Total Offense:
-      %dd ##{@stats[:total_offense]}
+      %dd.total_offense= "##{ @stats[:total_offense] }"
 
       %dt Passing Offense:
-      %dd ##{@stats[:passing_offense]}
+      %dd.passing_offense= "##{ @stats[:passing_offense] }"
 
       %dt Rushing Offense:
-      %dd ##{@stats[:rushing_offense]}
+      %dd.rushing_offense= "##{ @stats[:rushing_offense] }"
+
     %hr
+
     %dl
       %dt Total Defense:
-      %dd ##{@stats[:total_defense]}
+      %dd.total_defense= "##{ @stats[:total_defense] }"
 
       %dt Passing Defense:
-      %dd ##{@stats[:passing_defense]}
+      %dd.passing_defense= "##{ @stats[:passing_defense] }"
 
       %dt Rushing Defense:
-      %dd ##{@stats[:rushing_defense]}
+      %dd.rushing_defense= "##{ @stats[:rushing_defense] }"
 
 #footer
   Created by Emilio Cavazos

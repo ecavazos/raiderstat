@@ -8,7 +8,8 @@ describe "URLBuilder" do
   end
 
   describe "building offense URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:offense, :total)
     end
 
@@ -26,7 +27,8 @@ describe "URLBuilder" do
   end
 
   describe "building defense URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:defense, :total)
     end
 
@@ -44,7 +46,8 @@ describe "URLBuilder" do
   end
 
   describe "building total stats URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:offense, :total)
     end
 
@@ -58,7 +61,8 @@ describe "URLBuilder" do
   end
 
   describe "building offensive passing stats URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:offense, :passing)
     end
 
@@ -72,7 +76,8 @@ describe "URLBuilder" do
   end
 
   describe "building offensive rushing stats URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:offense, :rushing)
     end
 
@@ -86,7 +91,8 @@ describe "URLBuilder" do
   end
 
   describe "building defensive passing stats URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:defense, :passing)
     end
 
@@ -100,7 +106,8 @@ describe "URLBuilder" do
   end
 
   describe "building defensive rushing stats URLs" do
-    before (:each) do
+
+    before do
       @url = URLBuilder.build(:defense, :rushing)
     end
 
@@ -113,3 +120,4 @@ describe "URLBuilder" do
     end
   end
 end
+
